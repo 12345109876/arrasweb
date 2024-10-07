@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuadro de Usuarios y Puntos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f9f969;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        img {
+            width: 900px; /* Ajusta el tamaño según lo necesites */
+            height: 250px; /* Mantiene la proporción */
+            margin-top: 20px;
+        }
+
+        table {
+            width: 60%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        td {
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        /* Estilo del botón */
+        .next-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .next-button:hover {
+            background-color: #45a049;
+        }
+
+        .sort-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .sort-button:hover {
+            background-color: #007B9A;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>INDIVIDUAL</h1>
+
+    <!-- Agrega la imagen aquí -->
+    <img src="c:\Users\hr884\Downloads\WhatsApp Image 2024-09-28 at 09.12.51.jpeg" alt="Descripción de la imagen">
+
+    <button class="sort-button" onclick="ordenarPuntos()">Ordenar Puntos</button>
+    
+    <table id="tablaPuntos">
+        <thead>
+            <tr>
+                <th>Participantes</th>
+                <th>Puntos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Abi </td>
+                <td>7</td>
+            </tr>
+            <tr>
+                <td>Araceli</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>Valeria</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>Martin</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>Jazmin</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>Lucas</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>Mathi</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>Gloria</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>Milca</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>Eli</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>Anto</td>
+                <td>7</td>
+            </tr>
+            <tr>
+                <td>Zhiomara</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>Misael</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>Nahir</td>
+                <td>3</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Botón que dirige a la segunda página -->
+    <button class="next-button" onclick="window.location.href='equipos.html'">Siguiente Página</button>
+
+    <script>
+        function ordenarPuntos() {
+            let tabla = document.getElementById("tablaPuntos");
+            let filas = Array.from(tabla.tBodies[0].rows); // Obtenemos todas las filas del cuerpo de la tabla
+
+            // Ordenar las filas por puntos (columna 2)
+            filas.sort((a, b) => {
+                let puntosA = parseInt(a.cells[1].textContent);
+                let puntosB = parseInt(b.cells[1].textContent);
+                return puntosB - puntosA; // Orden descendente
+            });
+
+            // Limpiamos el cuerpo de la tabla y agregamos las filas ordenadas
+            const tbody = tabla.tBodies[0];
+            tbody.innerHTML = ""; // Limpiamos el cuerpo de la tabla
+            filas.forEach(fila => tbody.appendChild(fila)); // Agregamos las filas ordenadas
+        }
+    </script>
+
+</body>
+</html>
