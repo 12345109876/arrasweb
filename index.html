@@ -1,200 +1,144 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuadro de Usuarios y Puntos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f9f969;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            height: 100vh;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-top: 20px;
-        }
-
-        img {
-            width: 900px; /* Ajusta el tamaño según lo necesites */
-            height: 250px; /* Mantiene la proporción */
-            margin-top: 20px;
-        }
-
-        table {
-            width: 60%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background-color: #fff;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-            font-size: 1.2em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        td {
-            font-size: 1.5em;
-            color: #333;
-        }
-
-        /* Estilo del botón */
-        .next-button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-        }
-
-        .next-button:hover {
-            background-color: #45a049;
-        }
-
-        .sort-button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #008CBA;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-        }
-
-        .sort-button:hover {
-            background-color: #007B9A;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Quiz Online</title>
+<style>
+body{margin:0;font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh;display:flex;justify-content:center;align-items:center}
+.card{background:white;width:420px;padding:30px;border-radius:15px;box-shadow:0 15px 30px rgba(0,0,0,.2);text-align:center}
+input{width:80%;padding:10px;margin:10px 0;border-radius:8px;border:1px solid #ccc}
+button{padding:12px 20px;border:none;border-radius:8px;background:#667eea;color:white;font-size:16px;cursor:pointer}
+button:hover{background:#5563d9}
+.option{display:block;margin:10px 0;padding:12px;border-radius:8px;border:1px solid #ddd;cursor:pointer;transition:.3s}
+.option:hover{background:#f0f0ff}
+.correct{background:#c8f7c5;border-color:#2ecc71}
+.wrong{background:#f7c5c5;border-color:#e74c3c}
+.progress{height:10px;background:#eee;border-radius:5px;overflow:hidden;margin:15px 0}
+.bar{height:100%;width:0%;background:#667eea;transition:.4s}
+.score{font-size:18px;margin-top:10px}
+</style>
 </head>
 <body>
 
-    <h1>INDIVIDUAL</h1>
+<div class="card">
+  <div id="start">
+    <h2>Quiz Online</h2>
+    <input type="text" id="player" placeholder="Tu nombre">
+    <button onclick="startQuiz()">Comenzar</button>
+  </div>
 
-    <!-- Agrega la imagen aquí -->
-    <img src="c:\Users\hr884\Downloads\WhatsApp Image 2024-09-28 at 09.12.51.jpeg" alt="Descripción de la imagen">
+  <div id="game" style="display:none;">
+    <div class="progress"><div id="bar" class="bar"></div></div>
+    <h3 id="question"></h3>
+    <div id="options"></div>
+    <div class="score">Puntaje: <span id="score">0</span></div>
+  </div>
 
-    <button class="sort-button" onclick="ordenarPuntos()">Ordenar Puntos</button>
-    
-    <table id="tablaPuntos">
-        <thead>
-            <tr>
-                <th>Participantes</th>
-                <th>Puntos</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Abi </td>
-                <td>7</td>
-            </tr>
-            <tr>
-                <td>Araceli</td>
-                <td>4</td>
-            </tr>
-            <tr>
-                <td>Valeria</td>
-                <td>3</td>
-            </tr>
-            <tr>
-                <td>Martin</td>
-                <td>6</td>
-            </tr>
-            <tr>
-                <td>Jazmin</td>
-                <td>6</td>
-            </tr>
-            <tr>
-                <td>Lucas</td>
-                <td>3</td>
-            </tr>
-            <tr>
-                <td>Mathi</td>
-                <td>2</td>
-            </tr>
-            <tr>
-                <td>Gloria</td>
-                <td>3</td>
-            </tr>
-            <tr>
-                <td>Milca</td>
-                <td>5</td>
-            </tr>
-            <tr>
-                <td>Eli</td>
-                <td>5</td>
-            </tr>
-            <tr>
-                <td>Anto</td>
-                <td>7</td>
-            </tr>
-            <tr>
-                <td>Zhiomara</td>
-                <td>4</td>
-            </tr>
-            <tr>
-                <td>Misael</td>
-                <td>4</td>
-            </tr>
-            <tr>
-                <td>Nahir</td>
-                <td>3</td>
-            </tr>
-        </tbody>
-    </table>
+  <div id="end" style="display:none;">
+    <h2>¡Juego terminado!</h2>
+    <p>Puntaje final: <strong id="finalScore"></strong></p>
+  </div>
+</div>
 
-    <!-- Botón que dirige a la segunda página -->
-    <button class="next-button" onclick="window.location.href='equipos.html'">Siguiente Página</button>
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
-    <script>
-        function ordenarPuntos() {
-            let tabla = document.getElementById("tablaPuntos");
-            let filas = Array.from(tabla.tBodies[0].rows); // Obtenemos todas las filas del cuerpo de la tabla
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyRgmnRK6xCTx7xToIUjJpEDGtVnsIjs0A",
+  authDomain: "quiz-online-1d69e.firebaseapp.com",
+  databaseURL: "https://quiz-online-1d69e-default-rtdb.firebaseio.com",
+  projectId: "quiz-online-1d69e",
+  storageBucket: "quiz-online-1d69e.appspot.com",
+  messagingSenderId: "660762522042",
+  appId: "1:660762522042:web:6ff3a31017c4d121962d83"
+};
 
-            // Ordenar las filas por puntos (columna 2)
-            filas.sort((a, b) => {
-                let puntosA = parseInt(a.cells[1].textContent);
-                let puntosB = parseInt(b.cells[1].textContent);
-                return puntosB - puntosA; // Orden descendente
-            });
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+</script>
 
-            // Limpiamos el cuerpo de la tabla y agregamos las filas ordenadas
-            const tbody = tabla.tBodies[0];
-            tbody.innerHTML = ""; // Limpiamos el cuerpo de la tabla
-            filas.forEach(fila => tbody.appendChild(fila)); // Agregamos las filas ordenadas
-        }
-    </script>
+<script>
+const questions=[
+ {q:"¿Capital de Francia?",o:["Madrid","París","Roma","Berlín"],a:1},
+ {q:"5 x 6 = ?",o:["20","30","35","25"],a:1},
+ {q:"Planeta rojo",o:["Marte","Venus","Júpiter","Saturno"],a:0},
+ {q:"Lenguaje web",o:["HTML","Python","C++","Java"],a:0},
+ {q:"Continentes",o:["5","6","7","8"],a:2}
+];
+
+let index=0,score=0,player="",locked=false;
+
+function startQuiz(){
+  player=document.getElementById("player").value.trim();
+  if(player==="") return alert("Escribe tu nombre");
+
+  db.ref("scores/"+player).set({
+    name: player,
+    score: 0
+  });
+
+  document.getElementById("start").style.display="none";
+  document.getElementById("game").style.display="block";
+  loadQuestion();
+}
+
+function loadQuestion(){
+  locked=false;
+  const q=questions[index];
+  document.getElementById("question").innerText=q.q;
+  const opt=document.getElementById("options");
+  opt.innerHTML="";
+
+  q.o.forEach((text,i)=>{
+    const div=document.createElement("div");
+    div.className="option";
+    div.innerText=text;
+    div.onclick=()=>selectOption(div,i);
+    opt.appendChild(div);
+  });
+
+  document.getElementById("bar").style.width=(index/questions.length)*100+"%";
+}
+
+function selectOption(element,i){
+  if(locked) return;
+  locked=true;
+
+  const correct=questions[index].a;
+  const options=document.querySelectorAll(".option");
+
+  if(i===correct){
+    element.classList.add("correct");
+    score++;
+  } else {
+    element.classList.add("wrong");
+    options[correct].classList.add("correct");
+  }
+
+  document.getElementById("score").innerText=score;
+
+  db.ref("scores/"+player).update({ score });
+
+  setTimeout(()=>{
+    index++;
+    if(index<questions.length) loadQuestion();
+    else finishQuiz();
+  },800);
+}
+
+function finishQuiz(){
+  document.getElementById("game").style.display="none";
+  document.getElementById("end").style.display="block";
+  document.getElementById("finalScore").innerText=score;
+
+  db.ref("scores/"+player).update({ score });
+}
+</script>
 
 </body>
 </html>
+
+
+
